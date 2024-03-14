@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Reflex.Attributes;
+using SebastianFeistl.Winky.Serialization;
 
 namespace SebastianFeistl.Winky.Core
 {
     public abstract class Repository<TKey, TModel> where TModel : class
     {
-        protected readonly Dictionary<TKey, TModel> Models = new();
+        [Inject] protected IJsonConverter JsonConverter;
+        
+        protected Dictionary<TKey, TModel> Models = new();
         private string ModelName => typeof(TModel).Name; 
 
         public virtual event Action<TKey> ModelAdded = _ => { };
@@ -14,6 +18,59 @@ namespace SebastianFeistl.Winky.Core
         public virtual event Action<TKey> ModelRemoved = _ => { };
 
         public bool IsEmpty => Models.Count == 0;
+
+        /// <summary>
+        /// Set the <typeparam name="TModel">model</typeparam>
+        /// </summary>
+        /// <param name="models"></param>
+        /// <param name="notifyUpdates"></param>
+        /// <exception cref="ArgumentException"></exception>
+        public void SetModels(Dictionary<TKey, TModel> models, bool notifyUpdates = false)
+        {
+            if (models == null)
+            {
+                throw new ArgumentException($"{nameof(models)} cannot be null.");
+            }
+            
+            if (!notifyUpdates)
+            {
+                Models = models;
+                return;
+            }
+
+            foreach (var (key, model) in models)
+            {
+                if (Exists(key))
+                {
+                    // Invoke "Updated" events for each model that was already present
+                    Update(key, model);
+                    continue;
+                }
+                
+                // Invoke "Added" events for each new model
+                Add(key, model);
+            }
+
+            foreach (var (key, model) in Models)
+            {
+                if (!models.ContainsKey(key))
+                {
+                    // Invoke "Remove" events for each model no longer present
+                    Remove(key);
+                }
+            }
+        }
+
+        public void FromJson(string data, bool notifyUpdates = false)
+        {
+            var models = JsonConverter.Deserialize<Dictionary<TKey, TModel>>(data);
+            SetModels(models, notifyUpdates);
+        }
+        
+        public string ToJson()
+        {
+            return JsonConverter.Serialize(Models, true);
+        }
 
         public virtual List<TModel> All()
         {
@@ -61,7 +118,7 @@ namespace SebastianFeistl.Winky.Core
         public TModel First()
         {
             if (IsEmpty)
-                throw new InvalidOperationException($"Cannot get the first model because the repository is empty.");
+                throw new InvalidOperationException($"Cannot get the first {ModelName} model because the repository is empty.");
 
             return Models.First().Value;
         }
@@ -69,7 +126,7 @@ namespace SebastianFeistl.Winky.Core
         public TModel Last()
         {
             if (IsEmpty)
-                throw new InvalidOperationException($"Cannot get the last model because the repository is empty.");
+                throw new InvalidOperationException($"Cannot get the last {ModelName} model because the repository is empty.");
 
             return Models.Last().Value;
         }
