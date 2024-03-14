@@ -8,6 +8,10 @@
   "documentationUrl": "https://example.com/",
   "changelogUrl": "https://example.com/changelog.html",
   "licensesUrl": "https://example.com/licensing.html",
+  "dependencies": {
+    "com.gustavopsantos.reflex": "7.1.0",
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
+  },
   "keywords": [
     "keyword1",
     "keyword2",
