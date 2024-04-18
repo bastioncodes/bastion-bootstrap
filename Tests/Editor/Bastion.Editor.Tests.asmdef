@@ -1,5 +1,5 @@
 {
-    "name": "SebastianFeistl.Winky.Editor.Tests",
+    "name": "Bastion.Editor.Tests",
     "rootNamespace": "",
     "references": [
         "GUID:3b7073b0ff6a2b24080143a0888beeb2",

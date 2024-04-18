@@ -1,9 +1,7 @@
 {
-    "name": "SebastianFeistl.Winky",
+    "name": "Bastion.Editor",
     "rootNamespace": "",
-    "references": [
-        "GUID:1530a967b84cfb44dbdd5e8a1989764f"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
