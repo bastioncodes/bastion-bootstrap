@@ -1,7 +1,7 @@
 ﻿using Reflex.Core;
 using UnityEngine;
 
-namespace SebastianFeistl.Winky.Core.Reflex
+namespace Bastion.Core.Reflex
 {
     public class GreetInstaller : MonoBehaviour, IInstaller
     {

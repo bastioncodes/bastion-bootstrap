@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
-using SebastianFeistl.Winky.Core;
+using Bastion.Core;
 
-namespace SebastianFeistl.Winky.WeaponSample
+namespace Bastion.WeaponSample
 {
     public class WeaponData : Data
     {

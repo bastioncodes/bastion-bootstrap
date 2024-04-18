@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SebastianFeistl.Winky.Core.Extensions;
+using Bastion.Core.Extensions;
 
-namespace SebastianFeistl.Winky.Serialization
+namespace Bastion.Serialization
 {
     public class NewtonsoftJsonConverter : IJsonConverter
     {

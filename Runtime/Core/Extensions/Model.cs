@@ -1,4 +1,4 @@
-﻿namespace SebastianFeistl.Winky.Core.Extensions
+﻿namespace Bastion.Core.Extensions
 {
     public abstract class Model<TData> where TData : Data
     {

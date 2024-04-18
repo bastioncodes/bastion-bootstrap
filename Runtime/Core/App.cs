@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using Reflex.Attributes;
-using SebastianFeistl.Winky.Compliance;
-using SebastianFeistl.Winky.Storage;
+using Bastion.Compliance;
+using Bastion.Storage;
 
-namespace SebastianFeistl.Winky.Core
+namespace Bastion.Core
 {
     public class App : MonoBehaviour
     {

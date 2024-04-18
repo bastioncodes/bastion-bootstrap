@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SebastianFeistl.Winky.Core.Extensions
+namespace Bastion.Core.Extensions
 {
     public static class DictionaryExtensions
     {

@@ -1,17 +1,17 @@
 ﻿using System;
 using System.IO;
-using SebastianFeistl.Winky.Core;
+using Bastion.Core;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 
-namespace SebastianFeistl.Winky.Storage
+namespace Bastion.Storage
 {
     /// <summary>
     /// Handles writing and reading files from the disk.
     /// </summary>
     public class FileManager : Manager
     {
-        private string rootPath;
+        private string _rootPath;
 
         /// <summary>
         /// The application root path where all persistent data files are located.
@@ -20,10 +20,10 @@ namespace SebastianFeistl.Winky.Storage
         {
             get
             {
-                if (rootPath == null)
-                    rootPath = Application.persistentDataPath + Path.DirectorySeparatorChar;
+                if (_rootPath == null)
+                    _rootPath = Application.persistentDataPath + Path.DirectorySeparatorChar;
 
-                return rootPath;
+                return _rootPath;
             }
         }
         

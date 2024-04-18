@@ -1,25 +1,26 @@
 {
-  "name": "com.sebastian-feistl.winky",
+  "name": "codes.bastion",
   "version": "0.0.1",
-  "displayName": "Winky",
-  "description": "This is an example package",
+  "displayName": "Bastion",
+  "description": "An experimental Unity bootstrap framework for faster and easier game development.",
   "unity": "2022.3",
-  "unityRelease": "11f1",
-  "documentationUrl": "https://example.com/",
-  "changelogUrl": "https://example.com/changelog.html",
-  "licensesUrl": "https://example.com/licensing.html",
+  "unityRelease": "25f1",
+  "documentationUrl": "https://bastion.codes/docs",
+  "changelogUrl": "https://bastion.codes/changelog",
+  "licensesUrl": "https://bastion.codes/license",
   "dependencies": {
-    "com.gustavopsantos.reflex": "7.1.0",
+    "com.gustavopsantos.reflex": "8.1.0",
     "com.unity.nuget.newtonsoft-json": "3.2.1"
   },
   "keywords": [
-    "keyword1",
-    "keyword2",
-    "keyword3"
+    "codes",
+    "bastion",
+    "unity",
+    "framework"
   ],
   "author": {
     "name": "Sebastian Feistl",
-    "email": "unity@example.com",
-    "url": "https://www.unity3d.com"
+    "email": "dev@bastion.codes",
+    "url": "https://bastion.codes"
   }
 }

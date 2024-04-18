@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Reflex.Attributes;
-using SebastianFeistl.Winky.Serialization;
+using Bastion.Serialization;
 
-namespace SebastianFeistl.Winky.Core
+namespace Bastion.Core
 {
     public abstract class Repository<TKey, TModel> where TModel : class
     {

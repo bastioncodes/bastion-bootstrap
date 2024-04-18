@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace SebastianFeistl.Winky.Core.Tests.Editor
+namespace Bastion.Core.Tests.Editor
 {
     public class RepositoryTests
     {

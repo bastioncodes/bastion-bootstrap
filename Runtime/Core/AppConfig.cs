@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
-namespace SebastianFeistl.Winky.Core
+namespace Bastion.Core
 {
     [CreateAssetMenu(fileName = "New AppConfig", menuName = "Winky/Configurations/App Config")]
     public class AppConfig : ScriptableObject

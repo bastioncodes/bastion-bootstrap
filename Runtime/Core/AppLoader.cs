@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace SebastianFeistl.Winky.Core
+namespace Bastion.Core
 {
     public class AppLoader : MonoBehaviour
     {

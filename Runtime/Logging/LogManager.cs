@@ -1,10 +1,10 @@
 ﻿using System;
 using Reflex.Attributes;
-using SebastianFeistl.Winky.Core;
-using SebastianFeistl.Winky.Serialization;
-using SebastianFeistl.Winky.Storage;
+using Bastion.Core;
+using Bastion.Serialization;
+using Bastion.Storage;
 
-namespace SebastianFeistl.Winky.Logging
+namespace Bastion.Logging
 {
     public class LogManager : Manager
     {

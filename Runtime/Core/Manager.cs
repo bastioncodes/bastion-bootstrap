@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SebastianFeistl.Winky.Core
+namespace Bastion.Core
 {
     public abstract class Manager : IDisposable
     {

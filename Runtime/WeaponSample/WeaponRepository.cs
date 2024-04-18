@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SebastianFeistl.Winky.Core;
+using Bastion.Core;
 
-namespace SebastianFeistl.Winky.WeaponSample
+namespace Bastion.WeaponSample
 {
     public class WeaponRepository : Repository<string, WeaponData>
     {

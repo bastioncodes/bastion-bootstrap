@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SebastianFeistl.Winky.Serialization
+namespace Bastion.Serialization
 {
     public class UnityJsonConverter : IJsonConverter
     {

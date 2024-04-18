@@ -1,8 +1,8 @@
 ﻿using Reflex.Core;
 using Reflex.Injectors;
-using SebastianFeistl.Winky.Core;
+using Bastion.Core;
 
-namespace SebastianFeistl.Winky.WeaponSample
+namespace Bastion.WeaponSample
 {
     public class WeaponFactory : Factory<WeaponData>
     {

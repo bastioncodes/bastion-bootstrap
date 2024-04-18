@@ -1,10 +1,10 @@
 ﻿using Reflex.Core;
-using SebastianFeistl.Winky.Compliance;
-using SebastianFeistl.Winky.Serialization;
-using SebastianFeistl.Winky.Storage;
+using Bastion.Compliance;
+using Bastion.Serialization;
+using Bastion.Storage;
 using UnityEngine;
 
-namespace SebastianFeistl.Winky.Core
+namespace Bastion.Core
 {
     /// <summary>
     /// The entry point of the application.

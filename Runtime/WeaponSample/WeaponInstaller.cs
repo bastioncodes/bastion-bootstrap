@@ -1,7 +1,7 @@
 ﻿using Reflex.Core;
 using UnityEngine;
 
-namespace SebastianFeistl.Winky.WeaponSample
+namespace Bastion.WeaponSample
 {
     public class WeaponInstaller : MonoBehaviour, IInstaller
     {

@@ -1,6 +1,6 @@
 ﻿using Reflex.Core;
 
-namespace SebastianFeistl.Winky.Core
+namespace Bastion.Core
 {
     public abstract class Factory<TModel> where TModel : class
     {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using SebastianFeistl.Winky.Core;
+using Bastion.Core;
 
-namespace SebastianFeistl.Winky.Logging
+namespace Bastion.Logging
 {
     public class LogData : Data
     {

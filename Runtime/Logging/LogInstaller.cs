@@ -1,7 +1,7 @@
 ﻿using Reflex.Core;
 using UnityEngine;
 
-namespace SebastianFeistl.Winky.Logging
+namespace Bastion.Logging
 {
     public class LogInstaller : MonoBehaviour, IInstaller
     {

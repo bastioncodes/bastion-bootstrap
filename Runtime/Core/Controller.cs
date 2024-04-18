@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Reflex.Attributes;
-using SebastianFeistl.Winky.Serialization;
+using Bastion.Serialization;
 using UnityEngine;
 
-namespace SebastianFeistl.Winky.Core
+namespace Bastion.Core
 {
     public abstract class Controller<TData> where TData : Data
     {

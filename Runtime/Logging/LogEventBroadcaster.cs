@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SebastianFeistl.Winky.Logging
+namespace Bastion.Logging
 {
     public static class LogEventBroadcaster
     {

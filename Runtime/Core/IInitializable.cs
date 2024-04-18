@@ -1,4 +1,4 @@
-﻿namespace SebastianFeistl.Winky.Core
+﻿namespace Bastion.Core
 {
     public interface IInitializable
     {

@@ -1,4 +1,4 @@
-﻿namespace SebastianFeistl.Winky.Core.Tests.Editor
+﻿namespace Bastion.Core.Tests.Editor
 {
     public class TestRepository : Repository<int, TestModel>
     {

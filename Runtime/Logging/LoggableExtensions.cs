@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SebastianFeistl.Winky.Logging
+namespace Bastion.Logging
 {
     /// <summary>
     /// Allows classes that implement the <see cref="ILoggable"/> interface to easily access logging functions while also

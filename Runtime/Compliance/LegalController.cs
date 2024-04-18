@@ -1,7 +1,7 @@
 ﻿using System;
-using SebastianFeistl.Winky.Core;
+using Bastion.Core;
 
-namespace SebastianFeistl.Winky.Compliance
+namespace Bastion.Compliance
 {
     public class LegalController : Controller<LegalData>
     {

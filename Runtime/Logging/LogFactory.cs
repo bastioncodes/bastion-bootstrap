@@ -1,10 +1,10 @@
 ﻿using System;
 using Reflex.Core;
 using Reflex.Injectors;
-using SebastianFeistl.Winky.Core;
+using Bastion.Core;
 using UnityEngine;
 
-namespace SebastianFeistl.Winky.Logging
+namespace Bastion.Logging
 {
     public class LogFactory : Factory<LogData>
     {

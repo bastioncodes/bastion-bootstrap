@@ -1,4 +1,4 @@
-﻿namespace SebastianFeistl.Winky.Logging
+﻿namespace Bastion.Logging
 {
     public interface ILoggable
     {

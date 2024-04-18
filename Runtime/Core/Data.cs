@@ -1,10 +1,10 @@
 ﻿using System.Runtime.Serialization;
 using Reflex.Attributes;
-using SebastianFeistl.Winky.Logging;
-using SebastianFeistl.Winky.Serialization;
-using SebastianFeistl.Winky.Storage;
+using Bastion.Logging;
+using Bastion.Serialization;
+using Bastion.Storage;
 
-namespace SebastianFeistl.Winky.Core
+namespace Bastion.Core
 {
     [DataContract]
     public abstract class Data : ILoggable

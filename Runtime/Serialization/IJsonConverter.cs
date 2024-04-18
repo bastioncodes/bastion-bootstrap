@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SebastianFeistl.Winky.Serialization
+namespace Bastion.Serialization
 {
     public interface IJsonConverter
     {
