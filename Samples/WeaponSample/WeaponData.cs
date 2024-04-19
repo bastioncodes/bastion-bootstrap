@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using Bastion.Core;
 
-namespace Bastion.WeaponSample
+namespace Bastion.Samples
 {
     public class WeaponData : Data
     {
