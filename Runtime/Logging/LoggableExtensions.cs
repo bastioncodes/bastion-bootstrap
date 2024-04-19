@@ -14,7 +14,6 @@ namespace Bastion.Logging
     ///         this.Log("Hello World");
     ///     }
     /// }
-    /// 
     /// </code>
     /// </example>
     /// </summary>

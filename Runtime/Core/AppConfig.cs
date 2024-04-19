@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Bastion.Core
 {
-    [CreateAssetMenu(fileName = "New AppConfig", menuName = "Winky/Configurations/App Config")]
+    [CreateAssetMenu(fileName = "New AppConfig", menuName = "Bastion/Configs/App Config")]
     public class AppConfig : ScriptableObject
     {
         private const string ResourcePath = "Configs/AppConfig";
