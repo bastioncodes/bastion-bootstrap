@@ -7,7 +7,6 @@ namespace Bastion.Samples
     {
         public void InstallBindings(ContainerBuilder builder)
         {
-            builder.AddTransient(typeof(WeaponData));
             builder.AddSingleton(typeof(WeaponFactory));
             builder.AddSingleton(typeof(WeaponRepository));
         }
