@@ -1,4 +1,6 @@
-﻿using Reflex.Core;
+﻿using System;
+using Reflex.Core;
+using Reflex.Injectors;
 
 namespace Bastion.Core
 {
@@ -6,14 +8,23 @@ namespace Bastion.Core
     {
         protected readonly Container Container;
 
-        public Factory(Container container)
+        protected Factory(Container container)
         {
             Container = container;
         }
         
-        public TModel Create()
+        protected TModel Create()
         {
             return Container.Resolve<TModel>();
+        }
+        
+        protected TModel CreateWithInjection(Action<TModel> onComplete = null)
+        {
+            var instance = Container.Resolve<TModel>();
+            AttributeInjector.Inject(instance, Container);
+            onComplete?.Invoke(instance);
+            
+            return instance;
         }
     }
 }

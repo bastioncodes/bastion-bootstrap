@@ -13,6 +13,7 @@ namespace Bastion.Core
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void InitLoadingScene()
         {
+            // TODO: Preload initial boot scene here
             return;
             var config = AppConfig.Load();
             

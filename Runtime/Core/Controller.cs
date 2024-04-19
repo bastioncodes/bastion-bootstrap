@@ -6,12 +6,11 @@ namespace Bastion.Core
 {
     public abstract class Controller<TData> where TData : Data
     {
-        public TData Data { get; protected set; }
+        protected TData Data { get; set; }
         
-        [Inject]
-        protected IJsonConverter JsonConverter { get; private set; }
+        [Inject] protected IJsonConverter JsonConverter { get; private set; }
 
-        public Controller(TData data)
+        protected Controller(TData data)
         {
             Data = data;
         }
