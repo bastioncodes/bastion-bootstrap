@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Reflex.Attributes;
 using Bastion.Serialization;
-using UnityEngine;
 
 namespace Bastion.Core
 {

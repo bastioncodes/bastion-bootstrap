@@ -7,8 +7,12 @@ using UnityEngine;
 namespace Bastion.Core
 {
     /// <summary>
-    /// The entry point of the application.
-    /// Bind essential dependencies making them globally available.
+    /// Create and bind global dependencies.
+    ///
+    /// <remarks>
+    /// Singletons are objects with only one of its kind.
+    /// Transients are objects that can have multiple instances. They will need to be created using a <see cref="Factory{TModel}"/> in order to resolve dependencies.
+    /// </remarks>
     /// </summary>
     public class AppInstaller : MonoBehaviour, IInstaller
     {
