@@ -16,17 +16,8 @@ namespace Bastion.Storage
         /// <summary>
         /// The application root path where all persistent data files are located.
         /// </summary>
-        public string RootPath
-        {
-            get
-            {
-                if (_rootPath == null)
-                    _rootPath = Application.persistentDataPath + Path.DirectorySeparatorChar;
+        public string RootPath => _rootPath ??= Application.persistentDataPath + Path.DirectorySeparatorChar;
 
-                return _rootPath;
-            }
-        }
-        
         public override void Initialize(Action onComplete = null, Action<Exception> onError = null)
         {
             //
