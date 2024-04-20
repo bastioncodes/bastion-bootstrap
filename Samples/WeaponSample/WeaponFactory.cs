@@ -13,12 +13,18 @@ namespace Bastion.Samples
 
         public WeaponData Create(string name, int damage, float cooldown)
         {
-            return CreateWithInjection(weapon =>
+            // Create new object with specific constructor
+            return CreateWithInjection(() => new WeaponData(name, damage, cooldown));
+            
+            // Alternative: Create new object with additional initialization code after object creation
+            /*
+            return CreateWithInjection(() => new WeaponData(), weapon =>
             {
                 weapon.Name = name;
                 weapon.Damage = damage;
                 weapon.Cooldown = cooldown;
             });
+            */
         }
         
         public WeaponData Create(string name)

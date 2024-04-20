@@ -13,17 +13,12 @@ namespace Bastion.Core
             Container = container;
         }
         
-        protected TModel Create()
+        protected TModel CreateWithInjection(Func<TModel> createInstance, Action<TModel> onComplete = null)
         {
-            return Container.Resolve<TModel>();
-        }
-        
-        protected TModel CreateWithInjection(Action<TModel> onComplete = null)
-        {
-            var instance = Container.Resolve<TModel>();
+            var instance = createInstance();
             AttributeInjector.Inject(instance, Container);
             onComplete?.Invoke(instance);
-            
+             
             return instance;
         }
     }
