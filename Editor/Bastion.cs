@@ -1,5 +1,6 @@
 using UnityEditor;
 using System.IO;
+using Bastion.Storage;
 using UnityEngine;
 
 namespace Bastion.Editor
@@ -10,7 +11,7 @@ namespace Bastion.Editor
      */
     public static class BoilerplateGenerator
     {
-        [MenuItem("Bastion/Publish App File")]
+        [MenuItem("Bastion/Configuration/Publish App File")]
         public static void GenerateAppBoilerplate()
         {
             string templatePath = "Packages/codes.bastion/Samples/Boilerplate/App.cs";
@@ -45,6 +46,12 @@ namespace Bastion.Editor
             {
                 Debug.LogError($"Template file not found at {templatePath}");
             }
+        }
+
+        [MenuItem("Bastion/Storage/Open Root Path Location %#&p")]
+        public static void RevealRootPathInFinder()
+        {
+            EditorUtility.RevealInFinder(new FileManager().RootPath);
         }
     }   
 }
