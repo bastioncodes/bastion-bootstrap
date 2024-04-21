@@ -18,7 +18,7 @@ namespace Bastion.Core
     {
         public void InstallBindings(ContainerBuilder builder)
         {
-            builder.AddSingleton(typeof(UnityJsonConverter), typeof(IJsonConverter));
+            builder.AddSingleton(typeof(NewtonsoftJsonConverter), typeof(IJsonConverter));
             builder.AddSingleton(typeof(LegalController));
             builder.AddSingleton(typeof(LegalManager));
             builder.AddSingleton(typeof(FileManager));

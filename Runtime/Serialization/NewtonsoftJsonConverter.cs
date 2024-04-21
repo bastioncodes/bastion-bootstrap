@@ -2,12 +2,24 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Bastion.Core.Extensions;
+using Bastion.Serialization.Newtonsoft;
+using Reflex.Attributes;
 
 namespace Bastion.Serialization
 {
     public class NewtonsoftJsonConverter : IJsonConverter
     {
         private const string JsonDataPropertyName = "data";
+
+        [Inject] private readonly JsonConverterRegistry _jsonConverterRegistry;
+
+        public NewtonsoftJsonConverter()
+        {
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                Converters = _jsonConverterRegistry.Converters
+            };
+        }
 
         public string Serialize(object value, bool prettyPrint = false)
         {
