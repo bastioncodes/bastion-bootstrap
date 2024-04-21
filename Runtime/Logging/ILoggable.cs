@@ -2,7 +2,9 @@
 {
     public interface ILoggable
     {
-        public bool EnableLogging => false;
-        public string LogChannel => "Default";
+        bool EnableLogging => true;
+        string LogName => string.Empty;
+        string LogColor => LoggableColor.Sky;
+        string LogChannel => "Default";
     }
 }
