@@ -1,8 +1,9 @@
-﻿using Reflex.Core;
+﻿using Bastion.Core;
+using Reflex.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Bastion.Core
+namespace Bastion.Boot
 {
     public class AppLoader : MonoBehaviour
     {

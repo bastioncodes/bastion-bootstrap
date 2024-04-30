@@ -1,11 +1,12 @@
 ﻿using Reflex.Core;
 using Bastion.Compliance;
+using Bastion.Core;
 using Bastion.Serialization;
 using Bastion.Storage;
 using Reflex.Injectors;
 using UnityEngine;
 
-namespace Bastion.Core
+namespace Bastion.Boot
 {
     /// <summary>
     /// Create and bind global dependencies.
@@ -30,6 +31,9 @@ namespace Bastion.Core
                 AttributeInjector.Inject(data, container);
                 return data;
             });
+
+            
+            builder.OnContainerBuilt += ServiceLocator.SetContainer;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Bastion.Core
+namespace Bastion.Boot
 {
     [CreateAssetMenu(fileName = "New AppConfig", menuName = "Bastion/Configs/App Config")]
     public class AppConfig : ScriptableObject
