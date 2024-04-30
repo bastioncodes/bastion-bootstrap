@@ -29,9 +29,11 @@ namespace Bastion.Core
             FromJson<T>(data);
         }
 
-        public T FromJson<T>(string data) where T : Data
+        public static T FromJson<T>(string data) where T : Data
         {
-            return JsonConverter.Deserialize<T>(data);
+            var jsonConverter = ServiceLocator.Find<IJsonConverter>();
+            
+            return jsonConverter.Deserialize<T>(data);
         }
     }
 }
