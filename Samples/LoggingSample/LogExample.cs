@@ -3,18 +3,15 @@ using UnityEngine;
 
 namespace Bastion.Samples
 {
-    public class LogExample : MonoBehaviour, ILoggable
+    public class LogExample : MonoBehaviour
     {
-        public string LogName => "My Custom Logger";
-        public string LogColor => LoggableColor.Gray;
-
         private void Start()
         {
-            this.Log("Hello World");
-            this.LogInfo("Hello World");
-            this.LogSuccess("Hello World");
-            this.LogWarning("Hello World");
-            this.LogError("Hello World");
+            BastionLogger.Log("Hello World");
+            BastionLogger.LogInfo("Hello World");
+            BastionLogger.LogSuccess("Hello World");
+            BastionLogger.LogWarning("Hello World");
+            BastionLogger.LogError("Hello World");
         }
     }
 }
