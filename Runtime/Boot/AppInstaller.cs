@@ -1,9 +1,9 @@
 ﻿using Reflex.Core;
 using Bastion.Compliance;
 using Bastion.Core;
+using Bastion.Logging;
 using Bastion.Serialization;
 using Bastion.Storage;
-using Reflex.Injectors;
 using UnityEngine;
 
 namespace Bastion.Boot
@@ -19,19 +19,14 @@ namespace Bastion.Boot
     {
         public void InstallBindings(ContainerBuilder builder)
         {
+            BastionLogger.LogInfo("Installing global bindings ...");
+
+            // Install global bindings
             builder.AddSingleton(typeof(NewtonsoftJsonConverter), typeof(IJsonConverter));
-            builder.AddSingleton(typeof(LegalController));
-            builder.AddSingleton(typeof(LegalManager));
             builder.AddSingleton(typeof(FileManager));
-
-            // Example of factory pattern, to ensure newly created objects resolve dependencies
-            builder.AddTransient(container =>
-            {
-                var data = new LegalData();
-                AttributeInjector.Inject(data, container);
-                return data;
-            });
-
+            
+            // Call other module installers
+            new LegalInstaller().InstallBindings(builder);
             
             builder.OnContainerBuilt += ServiceLocator.SetContainer;
         }

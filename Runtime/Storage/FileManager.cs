@@ -31,7 +31,6 @@ namespace Bastion.Storage
         public void SaveFile(string filename, string content)
         {
             string path = Path.Combine(RootPath, filename);
-            Debug.LogWarning("Saving file to path: " + path);
             CreateDirectory(path);
             File.WriteAllText(path, content);
         }
