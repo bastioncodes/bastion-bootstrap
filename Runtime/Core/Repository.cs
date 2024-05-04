@@ -6,25 +6,36 @@ using Bastion.Serialization;
 
 namespace Bastion.Core
 {
+    /// <summary>
+    /// Provides a generic repository for managing collections of models in a key-value pair structure.
+    /// Supports CRUD operations, serialization, and event-driven updates to efficiently handle model states. 
+    /// </summary>
+    /// <remarks>
+    /// This implementation is not thread-safe and may require modifications for thread safety in multi-threaded environments.
+    /// Also, consider performance implications when operating on large data sets.
+    /// </remarks>
+    /// <typeparam name="TKey">The type of keys used to identify models in the repository.</typeparam>
+    /// <typeparam name="TModel">The type of models stored in the repository. Must be a class.</typeparam>
     public abstract class Repository<TKey, TModel> where TModel : class
     {
         [Inject] protected IJsonConverter JsonConverter;
         
         protected Dictionary<TKey, TModel> Models = new();
-        private string ModelName => typeof(TModel).Name; 
+        protected string ModelName => typeof(TModel).Name; 
 
-        public virtual event Action<TKey> ModelAdded = _ => { };
-        public virtual event Action<TKey> ModelUpdated = _ => { };
-        public virtual event Action<TKey> ModelRemoved = _ => { };
+        public virtual event Action<TKey> Added = _ => { };
+        public virtual event Action<TKey> Updated = _ => { };
+        public virtual event Action<TKey> Removed = _ => { };
 
         public bool IsEmpty => Models.Count == 0;
 
         /// <summary>
-        /// Set the <typeparam name="TModel">model</typeparam>
+        /// Replaces the existing collection of models with a new collection.
+        /// If 'notifyUpdates' is set to true, it triggers update and addition events for models that have changed or are new.
         /// </summary>
-        /// <param name="models"></param>
-        /// <param name="notifyUpdates"></param>
-        /// <exception cref="ArgumentException"></exception>
+        /// <param name="models">A dictionary of models with their associated keys that will replace the existing models in the repository.</param>
+        /// <param name="notifyUpdates">A boolean flag indicating whether to notify observers about updates (true) or to simply replace the models without notification (false).</param>
+        /// <exception cref="ArgumentException">Thrown if the input 'models' dictionary is null.</exception>
         public void SetModels(Dictionary<TKey, TModel> models, bool notifyUpdates = false)
         {
             if (models == null)
@@ -51,7 +62,7 @@ namespace Bastion.Core
                 Add(key, model);
             }
 
-            foreach (var (key, model) in Models)
+            foreach (var (key, _) in Models)
             {
                 if (!models.ContainsKey(key))
                 {
@@ -92,7 +103,7 @@ namespace Bastion.Core
             
             Models.Add(id, model);
             
-            ModelAdded.Invoke(id);
+            Added.Invoke(id);
         }
 
         public virtual void Update(TKey id, TModel model)
@@ -102,7 +113,7 @@ namespace Bastion.Core
             
             Models[id] = model;
             
-            ModelUpdated.Invoke(id);
+            Updated.Invoke(id);
         }
         
         public virtual void Remove(TKey id)
@@ -112,7 +123,7 @@ namespace Bastion.Core
             
             Models.Remove(id);
             
-            ModelRemoved.Invoke(id);
+            Removed.Invoke(id);
         }
 
         public TModel First()
@@ -133,7 +144,7 @@ namespace Bastion.Core
 
         public virtual TModel Random()
         {
-            if (Models.Count == 0)
+            if (IsEmpty)
                 throw new InvalidOperationException($"Cannot retrieve a random {ModelName} model from an empty repository.");
 
             return Random(1)[0];

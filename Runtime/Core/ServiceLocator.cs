@@ -1,26 +1,27 @@
 ﻿using System;
+using Bastion.Logging;
 using Reflex.Core;
 
 namespace Bastion.Core
 {
     public static class ServiceLocator
     {
-        private static Container _container;
+        public static Container Container { get; private set; }
 
         public static void SetContainer(Container container)
         {
-            _container = container;
+            Container = container;
+            BastionLogger.LogSuccess("App container built successfully.");
         }
 
         public static T Find<T>()
         {
-            if (_container == null)
+            if (Container == null)
             {
                 throw new InvalidOperationException($"{nameof(ServiceLocator)} container not initialized.");
             }
 
-            return _container.Resolve<T>();
+            return Container.Resolve<T>();
         }
     }
-
 }

@@ -9,12 +9,13 @@ namespace Bastion.Compliance
         
         public LegalController(LegalData data) : base(data)
         {
-            
+            //
         }
 
         public void AcceptTermsAndConditions()
         {
-            Data.AcceptedTermsAndConditionsAt = DateTime.Now;
+            ModelData.AcceptedTermsAndConditionsAt = DateTime.Now;
+            TermsAndConditionsAccepted();
         }
     }
 }
