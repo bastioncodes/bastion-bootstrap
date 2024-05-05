@@ -25,21 +25,26 @@ namespace Bastion.Logging
             // Get the declaring type of the calling method
             Type declaringType = method.DeclaringType;
             if (declaringType == null) return message;
+
+            // If the sender object has the Loggable attribute, use it to get additional configurations for that class
+            var loggableInfo = LogConfig.GetLoggableInfo(declaringType);
             
-            // TODO: Use declaringType to cache prefix in dictionary 
-            
-            // Construct the prefix using the class type
             string prefix = $"[{declaringType.Name}] ";
-                        
-            if (color != null)
+            string prefixColor = color;
+
+            if (loggableInfo is { EnableLogging: true })
             {
-                prefix = Colorize(prefix, color);
+                prefix = $"[{loggableInfo.LogName}] ";
+                prefixColor = !string.IsNullOrEmpty(loggableInfo.LogColor) ? loggableInfo.LogColor : color;
             }
 
-            // Add the class prefix to the message
-            message = prefix + message;
+            // Apply color to the prefix if defined
+            if (!string.IsNullOrEmpty(prefixColor))
+            {
+                prefix = Colorize(prefix, prefixColor);
+            }
 
-            return message;
+            return prefix + message;
         }
         
         public static string ColorizeMultipleLines(string message, string hexColor)
