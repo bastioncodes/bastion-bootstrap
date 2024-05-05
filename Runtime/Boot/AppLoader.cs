@@ -14,6 +14,11 @@ namespace Bastion.Boot
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void InitializeLoadingScene()
         {
+            // TODO: Fix this, when loading the scene here once again, some installers may be executed twice
+            return;
+            BastionLogger.LogInfo("Loading log config ...");
+            LogConfig.Initialize();
+            
             BastionLogger.LogInfo("Loading scene ...");
             
             int sceneIndex = SceneManager.GetActiveScene().buildIndex;
