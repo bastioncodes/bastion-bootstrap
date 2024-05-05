@@ -1,8 +1,8 @@
 using UnityEditor;
 
-namespace Bastion.Logging
+namespace Bastion.Theme
 {
-    public static class LoggableColor
+    public static class Color
     {
         public static readonly string Red = IsDarkMode ? "#ef4444" : "#991b1b";
         public static readonly string Yellow = IsDarkMode ? "#f59e0b" : "#92400e";

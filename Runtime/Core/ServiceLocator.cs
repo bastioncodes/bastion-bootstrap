@@ -11,7 +11,7 @@ namespace Bastion.Core
         public static void SetContainer(Container container)
         {
             Container = container;
-            BastionLogger.LogSuccess("App container built successfully.");
+            BastionLogger.LogInfo("App container built successfully.");
         }
 
         public static T Find<T>()
