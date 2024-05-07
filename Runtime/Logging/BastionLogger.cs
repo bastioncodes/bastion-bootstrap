@@ -51,10 +51,10 @@ namespace Bastion.Logging
                 message = LogUtility.ColorizeMultipleLines(message, messageColor);
             }
 
-            var prefix = LogUtility.Colorize(LogUtility.GetPrefixFromFilePath(filePath), prefixColor);
+            var prefixName = LogUtility.GetPrefixFromFilePath(filePath);
+            var prefix = LogUtility.Colorize(prefixName, prefixColor);
 
             return prefix + message;
-            // return LogUtility.AddClassPrefix(message, prefixColor);
         }
     }
 }

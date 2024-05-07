@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using UnityEngine;
 
 namespace Bastion.Logging
 {
@@ -13,7 +12,18 @@ namespace Bastion.Logging
     /// </summary>
     public static class LogConfig
     {
-        private static Dictionary<string, LogAttributeConfig> LoggableTypes { get; } = new ();
+        /// <summary>
+        /// LogAttribute ID mapping to cache their configuration data.
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// // This maps the attribute data to the string "ExampleObject".
+        /// [Log(nameof(ExampleObject))]
+        /// public class ExampleObject : MonoBehaviour
+        /// ...
+        /// </code>
+        /// </example>
+        private static Dictionary<string, LogAttributeConfig> LogConfigs { get; } = new ();
 
         public static void Initialize()
         {
@@ -24,34 +34,35 @@ namespace Bastion.Logging
                 {
                     var loggableAttribute = type.GetCustomAttribute<LogAttribute>();
                     if (loggableAttribute == null) continue;
-
-                    string typeName = type.Name;  // Assuming type.Name matches the filename without its extension
-
-                    if (LoggableTypes.ContainsKey(typeName))
+                    
+                    var id = loggableAttribute.Id;
+                    
+                    if (LogConfigs.ContainsKey(id))
                     {
-                        BastionLogger.LogError($"Cannot cache log configuration because key \"{typeName}\" already exists.");
+                        BastionLogger.LogWarning($"Cannot cache log configuration because key \"{id}\" already exists.");
                         continue;
                     }
                     
-                    LoggableTypes[typeName] = new LogAttributeConfig
+                    // Cache their log configuration
+                    LogConfigs[id] = new LogAttributeConfig
                     {
                         Name = loggableAttribute.Name,
                         Color = loggableAttribute.Color
                     };
                 }
             }
-            
-            LogAllConfigurations();
+
+            LogAllConfigs();
         }
         
-        private static void LogAllConfigurations()
+        private static void LogAllConfigs()
         {
             var sb = new StringBuilder();
-            sb.AppendLine("Cached log configurations:");
+            sb.AppendLine($"Discovered ({LogConfigs.Count}) log configurations.");
 
-            foreach (var kvp in LoggableTypes)
+            foreach (var kvp in LogConfigs)
             {
-                sb.AppendLine($"Discovered: {kvp.Key}");
+                sb.AppendLine(kvp.Key);
             }
 
             BastionLogger.LogInfo(sb.ToString());
@@ -59,7 +70,7 @@ namespace Bastion.Logging
         
         public static LogAttributeConfig GetLogAttributeConfig(string key)
         {
-            LoggableTypes.TryGetValue(key, out var info);
+            LogConfigs.TryGetValue(key, out var info);
             
             return info;
         }

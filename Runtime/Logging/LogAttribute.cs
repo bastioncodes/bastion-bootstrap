@@ -8,16 +8,15 @@ namespace Bastion.Logging
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public sealed class LogAttribute : Attribute
     {
-        // public string Channel { get; set; } = "Default";
-        // Currently only disables the settings override, but does not prevent the output of the log message itself
+        public string Channel { get; set; } = "Default";
         // public bool Enabled { get; set; } = true;
-        public Type Type { get; }
+        public string Id { get; private set; }
         public string Name { get; set; } = "";
         public string Color { get; set; } = null;
         
-        public LogAttribute(Type type)
+        public LogAttribute(string id)
         {
-            Type = type;
+            Id = id;
         }
     }
 }

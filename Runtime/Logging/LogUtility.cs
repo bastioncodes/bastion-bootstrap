@@ -18,6 +18,7 @@ namespace Bastion.Logging
         
         private const string FallbackPrefix = "Unknown";
         
+        [Obsolete("This reflection approach may no longer be needed.")]
         public static string AddClassPrefix(string message, string hexColor = null)
         {
             StackTrace stackTrace = new StackTrace();
@@ -60,11 +61,14 @@ namespace Bastion.Logging
         public static string GetPrefixFromFilePath(string filePath)
         {
             var className = ExtractClassNameFromPath(filePath);
-            
-            // Override config if an attribute exists for that file name
             var config = LogConfig.GetLogAttributeConfig(className);
             
-            return config == null ? $"[{className}] " : Colorize($"[{config.Name}] ", config.Color);
+            if (config == null)
+                return $"[{className}] ";
+
+            // Apply log configuration
+            return Colorize(string.IsNullOrEmpty(config.Name) ? $"[{className}] " : $"[{config.Name}] ",
+                config.Color);
         }
         
         private static string ExtractClassNameFromPath(string filePath)
