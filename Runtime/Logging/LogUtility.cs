@@ -9,13 +9,22 @@ namespace Bastion.Logging
 {
     public static class LogUtility
     {
-        public static string AddClassPrefix(string message, string color = null)
+        /// <summary>
+        /// The number of stack frames to skip in order to point to the original method that invoked sending the
+        /// log message. This helps to identify the correct class name prefix to be displayed in the log message.
+        /// </summary>
+        private const int StackFrameIndex = 3;
+        
+        
+        private const string FallbackPrefix = "Unknown";
+        
+        public static string AddClassPrefix(string message, string hexColor = null)
         {
             StackTrace stackTrace = new StackTrace();
 
             // Get the frame representing the calling method
             // The index refers to the number of intermediate steps (method invocations) since the log call
-            StackFrame frame = stackTrace.GetFrame(3);
+            StackFrame frame = stackTrace.GetFrame(StackFrameIndex);
             if (frame == null) return message;
             
             // Get the method info of the calling method
@@ -27,15 +36,16 @@ namespace Bastion.Logging
             if (declaringType == null) return message;
 
             // If the sender object has the Loggable attribute, use it to get additional configurations for that class
-            var loggableInfo = LogConfig.GetLoggableInfo(declaringType);
+            LogConfig.LogAttributeConfig logConfig = null; // LogConfig.GetLogAttributeConfig(declaringType);
             
             string prefix = $"[{declaringType.Name}] ";
-            string prefixColor = color;
+            string prefixColor = hexColor;
 
-            if (loggableInfo is { EnableLogging: true })
+            // Apply the log configuration
+            if (logConfig != null)
             {
-                prefix = $"[{loggableInfo.LogName}] ";
-                prefixColor = !string.IsNullOrEmpty(loggableInfo.LogColor) ? loggableInfo.LogColor : color;
+                prefix = $"[{logConfig.Name}] ";
+                prefixColor = !string.IsNullOrEmpty(logConfig.Color) ? logConfig.Color : hexColor;
             }
 
             // Apply color to the prefix if defined
@@ -46,7 +56,33 @@ namespace Bastion.Logging
 
             return prefix + message;
         }
+
+        public static string GetPrefixFromFilePath(string filePath)
+        {
+            var className = ExtractClassNameFromPath(filePath);
+            
+            // Override config if an attribute exists for that file name
+            var config = LogConfig.GetLogAttributeConfig(className);
+            
+            return config == null ? $"[{className}] " : Colorize($"[{config.Name}] ", config.Color);
+        }
         
+        private static string ExtractClassNameFromPath(string filePath)
+        {
+            return string.IsNullOrEmpty(filePath) ? FallbackPrefix : Path.GetFileNameWithoutExtension(filePath);
+        }
+        
+        /// <summary>
+        /// Applies color to the first 10 lines of a message to ensure correct color rendering in the Unity Editor console.
+        /// This method addresses a limitation in the Unity console where long color tags across multiple lines do not render properly.
+        /// The 10-line limit matches the maximum single log entry display in the Unity Editor, ensuring consistent visual output.
+        /// </summary>
+        /// <remarks>
+        /// In the expanded log view of the Unity Editor, full text coloring works without this line-by-line tagging as tags are properly parsed.
+        /// </remarks>
+        /// <param name="message">The message to be colorized.</param>
+        /// <param name="hexColor">The hexadecimal color code to apply to the message.</param>
+        /// <returns>A colorized string where each of the first 10 lines is individually wrapped with a color tag.</returns>
         public static string ColorizeMultipleLines(string message, string hexColor)
         {
             string[] lines = message.Split('\n');
@@ -77,7 +113,7 @@ namespace Bastion.Logging
         
         public static string Colorize(string message, string hexColor)
         {
-            return $"<color={hexColor}>{message}</color>";
+            return hexColor == null ? message : $"<color={hexColor}>{message}</color>";
         }
     }
 }
