@@ -1,62 +1,11 @@
-using System;
-using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using System.Text;
-using Debug = UnityEngine.Debug;
 
 namespace Bastion.Logging
 {
     public static class LogUtility
     {
-        /// <summary>
-        /// The number of stack frames to skip in order to point to the original method that invoked sending the
-        /// log message. This helps to identify the correct class name prefix to be displayed in the log message.
-        /// </summary>
-        private const int StackFrameIndex = 3;
-        
-        
         private const string FallbackPrefix = "Unknown";
-        
-        [Obsolete("This reflection approach may no longer be needed.")]
-        public static string AddClassPrefix(string message, string hexColor = null)
-        {
-            StackTrace stackTrace = new StackTrace();
-
-            // Get the frame representing the calling method
-            // The index refers to the number of intermediate steps (method invocations) since the log call
-            StackFrame frame = stackTrace.GetFrame(StackFrameIndex);
-            if (frame == null) return message;
-            
-            // Get the method info of the calling method
-            MethodBase method = frame.GetMethod();
-            if (method == null) return message;
-            
-            // Get the declaring type of the calling method
-            Type declaringType = method.DeclaringType;
-            if (declaringType == null) return message;
-
-            // If the sender object has the Loggable attribute, use it to get additional configurations for that class
-            LogConfig.LogAttributeConfig logConfig = null; // LogConfig.GetLogAttributeConfig(declaringType);
-            
-            string prefix = $"[{declaringType.Name}] ";
-            string prefixColor = hexColor;
-
-            // Apply the log configuration
-            if (logConfig != null)
-            {
-                prefix = $"[{logConfig.Name}] ";
-                prefixColor = !string.IsNullOrEmpty(logConfig.Color) ? logConfig.Color : hexColor;
-            }
-
-            // Apply color to the prefix if defined
-            if (!string.IsNullOrEmpty(prefixColor))
-            {
-                prefix = Colorize(prefix, prefixColor);
-            }
-
-            return prefix + message;
-        }
 
         public static string GetPrefixFromFilePath(string filePath)
         {
@@ -115,6 +64,15 @@ namespace Bastion.Logging
             return builder.ToString();
         }
         
+        /// <summary>
+        /// Applies a hexadecimal color to the entire message, wrapping it in a color tag for Unity Editor's console display.
+        /// </summary>
+        /// <remarks>
+        /// This method is used to colorize a single output line. For multi-line messages, use <see cref="ColorizeMultipleLines"/>.
+        /// </remarks>
+        /// <param name="message">The message to be colorized.</param>
+        /// <param name="hexColor">The hexadecimal color code to apply to the message. If null, the message is returned unaltered.</param>
+        /// <returns>The message wrapped in a color tag if a hexColor is provided; otherwise, the original message.</returns>
         public static string Colorize(string message, string hexColor)
         {
             return hexColor == null ? message : $"<color={hexColor}>{message}</color>";

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using Bastion.Theme;
 
 namespace Bastion.Logging
 {
@@ -10,6 +11,7 @@ namespace Bastion.Logging
     /// This class is initialized at the start of the application to collect and store configuration details from all loaded assemblies,
     /// allowing for quick retrieval during runtime without the overhead of reflection.
     /// </summary>
+    [Log(nameof(LogConfig), Color = Color.Sky)]
     public static class LogConfig
     {
         /// <summary>

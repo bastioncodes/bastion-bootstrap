@@ -14,7 +14,7 @@ namespace Bastion.Editor.Logging
         [MenuItem("Bastion/Debug/Discover Log Attributes")]
         public static void FindClassesWithAttribute()
         {
-            BastionLogger.Log("Finding classes that are using the LogAttribute ...");
+            BastionLogger.Log("Finding usages of the LogAttribute ...");
             var typesWithAttribute = new List<TypeInfo>();
 
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())

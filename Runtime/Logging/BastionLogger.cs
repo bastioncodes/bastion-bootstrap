@@ -6,55 +6,71 @@ namespace Bastion.Logging
 {
     public static class BastionLogger
     {
-        // Instead of those default variables, it would be nice to be able to configure them in a scriptable object
-        private const string DefaultPrefixColor = null;
-        private const string DefaultMessageColor = null;
-        
-        public static void Log(string message, string channel = LogChannel.Default, string prefixColor = null, string messageColor = null, Object context = null, [CallerFilePath] string filePath = "")
+        public static void Log(string message, string channel = LogChannel.Default, string prefixColor = null, string messageColor = null, Object context = null, LogLevel logLevel = LogLevel.Default, [CallerFilePath] string filePath = "")
         {
-            message = FormatLogMessage(message, prefixColor, messageColor, filePath);
-            Debug.Log(message, context);
+            LogMessage(message, channel, prefixColor, messageColor, context, logLevel, filePath);
         }
         
-        public static void LogInfo(string message, string channel = LogChannel.Default, string prefixColor = null, string messageColor = null, Object context = null, [CallerFilePath] string filePath = "")
+        public static void LogInfo(string message, string channel = LogChannel.Default, string prefixColor = null, string messageColor = null, Object context = null, LogLevel logLevel = LogLevel.Info, [CallerFilePath] string filePath = "")
         {
             var color = messageColor ?? ThemeColor.Blue;
-            message = FormatLogMessage(message, prefixColor, color, filePath);
-            Debug.Log(message, context);
+            LogMessage(message, channel, prefixColor, color, context, logLevel, filePath);
         }
         
-        public static void LogSuccess(string message, string channel = LogChannel.Default, string prefixColor = null, string messageColor = null, Object context = null, [CallerFilePath] string filePath = "")
+        public static void LogSuccess(string message, string channel = LogChannel.Default, string prefixColor = null, string messageColor = null, Object context = null, LogLevel logLevel = LogLevel.Success, [CallerFilePath] string filePath = "")
         {
             var color = messageColor ?? ThemeColor.Green;
-            message = FormatLogMessage(message, prefixColor, color, filePath);
-            Debug.Log(message, context);
+            LogMessage(message, channel, prefixColor, color, context, logLevel, filePath);
         }
         
-        public static void LogWarning(string message, string channel = LogChannel.Default, string prefixColor = null, string messageColor = null, Object context = null, [CallerFilePath] string filePath = "")
+        public static void LogWarning(string message, string channel = LogChannel.Default, string prefixColor = null, string messageColor = null, Object context = null, LogLevel logLevel = LogLevel.Warning, [CallerFilePath] string filePath = "")
         {
             var color = messageColor ?? ThemeColor.Yellow;
-            message = FormatLogMessage(message, prefixColor, color, filePath);
-            Debug.LogWarning(message, context);
+            LogMessage(message, channel, prefixColor, color, context, logLevel, filePath);
         }
         
-        public static void LogError(string message, string channel = LogChannel.Default, string prefixColor = null, string messageColor = null, Object context = null, [CallerFilePath] string filePath = "")
+        public static void LogError(string message, string channel = LogChannel.Default, string prefixColor = null, string messageColor = null, Object context = null, LogLevel logLevel = LogLevel.Error, [CallerFilePath] string filePath = "")
         {
             var color = messageColor ?? ThemeColor.Red;
-            message = FormatLogMessage(message, prefixColor, color, filePath);
-            Debug.LogError(message, context);
+            LogMessage(message, channel, prefixColor, color, context, logLevel, filePath);
         }
         
-        private static string FormatLogMessage(string message, string prefixColor = DefaultPrefixColor, string messageColor = DefaultMessageColor, string filePath = "")
+        private static void LogMessage(string message, string channel, string prefixColor, string messageColor, Object context,  LogLevel logLevel, string filePath)
+        {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            string formattedMessage = FormatLogMessage(message, prefixColor, messageColor, filePath);
+            switch (logLevel)
+            {
+                case LogLevel.Info:
+                    Debug.Log(formattedMessage, context);
+                    break;
+                case LogLevel.Success:
+                    Debug.Log(formattedMessage, context);
+                    break;
+                case LogLevel.Warning:
+                    Debug.LogWarning(formattedMessage, context);
+                    break;
+                case LogLevel.Error:
+                    Debug.LogError(formattedMessage, context);
+                    break;
+                default:
+                    Debug.Log(formattedMessage, context);
+                    break;
+            }
+#endif
+        }
+        
+        private static string FormatLogMessage(string message, string prefixColor, string messageColor, string filePath)
         {
             if (messageColor != null)
             {
                 message = LogUtility.ColorizeMultipleLines(message, messageColor);
             }
 
-            var prefixName = LogUtility.GetPrefixFromFilePath(filePath);
-            var prefix = LogUtility.Colorize(prefixName, prefixColor);
+            var prefix = LogUtility.GetPrefixFromFilePath(filePath);
+            var formattedPrefix = LogUtility.Colorize(prefix, prefixColor);
 
-            return prefix + message;
+            return formattedPrefix + message;
         }
     }
 }
