@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Bastion.Logging;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -8,14 +10,18 @@ namespace Bastion.Serialization.Newtonsoft
     /// Central registry for custom JsonConverters, facilitating the serialization of complex types.
     /// Add converters to this collection to ensure desired types are serialized correctly.
     /// </summary>
-    public class JsonConverterRegistry
+    [Serializable]
+    public class JsonConverterRegistry : MonoBehaviour, IJsonConverterRegistry
     {
-        public List<JsonConverter> Converters { get; } = new ()
+        public virtual List<JsonConverter> GetConverters()
         {
-            new Vector2Converter(),
-            new Vector3Converter(),
-            new ColorConverter(),
-            // Add additional converters here
-        };
+            return new List<JsonConverter>
+            {
+                new Vector2Converter(),
+                new Vector3Converter(),
+                new ColorConverter(),
+                // Default converters can be added here
+            };
+        }
     }
 }

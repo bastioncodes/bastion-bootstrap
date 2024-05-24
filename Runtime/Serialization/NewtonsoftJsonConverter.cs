@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Bastion.Core.Extensions;
-using Bastion.Serialization.Newtonsoft;
 using Reflex.Attributes;
 
 namespace Bastion.Serialization
@@ -11,13 +10,13 @@ namespace Bastion.Serialization
     {
         private const string JsonDataPropertyName = "data";
 
-        [Inject] private readonly JsonConverterRegistry _jsonConverterRegistry;
+        [Inject] private readonly IJsonConverterRegistry _jsonConverterRegistry;
 
         public NewtonsoftJsonConverter()
         {
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
-                Converters = _jsonConverterRegistry.Converters
+                Converters = _jsonConverterRegistry.GetConverters()
             };
         }
 

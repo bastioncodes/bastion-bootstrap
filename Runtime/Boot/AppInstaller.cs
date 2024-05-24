@@ -23,7 +23,6 @@ namespace Bastion.Boot
             BastionLogger.LogInfo("Installing global bindings ...");
 
             // Install global bindings
-            builder.AddSingleton(typeof(NewtonsoftJsonConverter), typeof(IJsonConverter));
             builder.AddSingleton(typeof(FileManager));
             
             // Call other module installers

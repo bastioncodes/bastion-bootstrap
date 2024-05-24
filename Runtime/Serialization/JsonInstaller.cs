@@ -1,5 +1,5 @@
-﻿using Bastion.Logging;
-using Bastion.Serialization.Newtonsoft;
+﻿using Bastion.Boot;
+using Bastion.Logging;
 using Reflex.Core;
 
 namespace Bastion.Serialization
@@ -8,9 +8,11 @@ namespace Bastion.Serialization
     {
         public void InstallBindings(ContainerBuilder builder)
         {
+            var config = AppConfig.Load();
+            
             // Currently tightly coupled with Newtonsoft
-            // Using the built-in Unity serialization would not require this dependency
-            builder.AddSingleton(typeof(JsonConverterRegistry));
+            builder.AddSingleton(typeof(NewtonsoftJsonConverter), typeof(IJsonConverter));
+            builder.AddSingleton(config.JsonConverterRegistry, typeof(IJsonConverterRegistry));
         }
     }
 }
