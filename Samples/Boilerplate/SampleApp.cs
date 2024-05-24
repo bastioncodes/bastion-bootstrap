@@ -8,7 +8,7 @@ namespace Bastion.Core
     /// <summary>
     /// The entry point of the application.
     /// </summary>
-    public class App : MonoBehaviour
+    public class SampleApp : MonoBehaviour
     {
         [Inject] private readonly LegalManager _legalManager;
         [Inject] private readonly FileManager _fileManager;
