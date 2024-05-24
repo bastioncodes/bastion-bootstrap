@@ -28,6 +28,7 @@ namespace Bastion.Core
         public virtual event Action<TKey> Removed = _ => { };
 
         public bool IsEmpty => Models.Count == 0;
+        public int Count => Models.Count;
 
         /// <summary>
         /// Replaces the existing collection of models with a new collection.
