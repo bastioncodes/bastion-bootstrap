@@ -3,6 +3,7 @@ using Bastion.Compliance;
 using Bastion.Core;
 using Bastion.Logging;
 using Bastion.Serialization;
+using Bastion.Serialization.Newtonsoft;
 using Bastion.Storage;
 using UnityEngine;
 
@@ -27,6 +28,7 @@ namespace Bastion.Boot
             
             // Call other module installers
             new LegalInstaller().InstallBindings(builder);
+            new JsonInstaller().InstallBindings(builder);
             
             builder.OnContainerBuilt += ServiceLocator.SetContainer;
         }
