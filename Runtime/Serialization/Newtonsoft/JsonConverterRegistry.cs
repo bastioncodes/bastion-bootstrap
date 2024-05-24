@@ -12,6 +12,7 @@ namespace Bastion.Serialization.Newtonsoft
         public List<JsonConverter> Converters { get; } = new ()
         {
             new Vector2Converter(),
+            new Vector3Converter(),
             new ColorConverter(),
             // Add additional converters here
         };
