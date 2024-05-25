@@ -14,6 +14,7 @@ namespace Bastion.Editor
         [MenuItem("Bastion/Configuration/Publish App File")]
         public static void GenerateAppBoilerplate()
         {
+            // TODO: Fix this, it is outdated
             string templatePath = "Packages/codes.bastion/Samples/Boilerplate/App.cs";
             string targetPath = "Assets/Scripts/App.cs";
 

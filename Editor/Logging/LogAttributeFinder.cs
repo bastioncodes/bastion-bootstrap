@@ -8,6 +8,9 @@ using UnityEditor;
 
 namespace Bastion.Editor.Logging
 {
+    /// <summary>
+    /// Discovers classes making use of the <see cref="LogAttribute"/> by using reflection.
+    /// </summary>
     [Log(nameof(LogAttributeFinder), Color = Color.Sky, Channel = LogChannel.Editor)]
     public class LogAttributeFinder : EditorWindow
     {
