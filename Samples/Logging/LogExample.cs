@@ -1,8 +1,7 @@
 using Bastion.Logging;
 using UnityEngine;
-using Color = Bastion.Theme.Color;
 
-namespace Bastion.Samples
+namespace Bastion.Samples.Logging
 {
     [Log(nameof(LogExample), Name = "Log Example")]
     public class LogExample : MonoBehaviour

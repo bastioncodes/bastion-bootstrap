@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Reflex.Attributes;
 
-namespace Bastion.Samples
+namespace Bastion.Samples.Weapon
 {
     // This is very useful for adding the ability to convert custom complex JSON structures automatically
     // Read and Write is defined here, then the JsonConverter needs to be added to the configuration

@@ -2,7 +2,7 @@
 using Reflex.Injectors;
 using Bastion.Core;
 
-namespace Bastion.Samples
+namespace Bastion.Samples.Weapon
 {
     public class WeaponFactory : Factory<WeaponData>
     {

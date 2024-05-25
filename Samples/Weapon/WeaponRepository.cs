@@ -2,7 +2,7 @@
 using System.Linq;
 using Bastion.Core;
 
-namespace Bastion.Samples
+namespace Bastion.Samples.Weapon
 {
     public class WeaponRepository : Repository<string, WeaponData>
     {

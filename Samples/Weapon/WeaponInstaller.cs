@@ -1,7 +1,7 @@
 ﻿using Reflex.Core;
 using UnityEngine;
 
-namespace Bastion.Samples
+namespace Bastion.Samples.Weapon
 {
     public class WeaponInstaller : MonoBehaviour, IInstaller
     {

@@ -3,12 +3,12 @@ using Reflex.Attributes;
 using Bastion.Compliance;
 using Bastion.Storage;
 
-namespace Bastion.Core
+namespace Bastion.Samples.Entrypoint
 {
     /// <summary>
     /// The entry point of the application.
     /// </summary>
-    public class SampleApp : MonoBehaviour
+    public class App : MonoBehaviour
     {
         [Inject] private readonly LegalManager _legalManager;
         [Inject] private readonly FileManager _fileManager;

@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using Bastion.Logging;
 using Bastion.Serialization.Newtonsoft;
 using Newtonsoft.Json;
 
-namespace Bastion.Samples.Boilerplate
+namespace Bastion.Samples.Entrypoint
 {
-    public class OverrideJsonConverterRegistry : JsonConverterRegistry
+    public class JsonConverterRegistry : Serialization.Newtonsoft.JsonConverterRegistry
     {
         public override List<JsonConverter> GetConverters()
         {
@@ -14,6 +13,7 @@ namespace Bastion.Samples.Boilerplate
                 new Vector2Converter(),
                 new Vector3Converter(),
                 new ColorConverter(),
+                // Add custom converters
             };
         }
     }
