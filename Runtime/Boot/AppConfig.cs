@@ -27,7 +27,7 @@ namespace Bastion.Boot
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            if (jsonConverterRegistry == null) LogMissingInspectorAssignment(nameof(jsonConverterRegistry));
+            // if (jsonConverterRegistry == null) LogMissingInspectorAssignment(nameof(jsonConverterRegistry));
         }
 #endif
     }
