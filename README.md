@@ -15,10 +15,22 @@ Bastion equips you with a robust set of tools, designed to make Unity developmen
 | File Storage | The built-in FileManager simplifies data storage with intuitive Save/Load functionalities.                   |
 | Logging     | Enhance your logging with features like customizable channels, debug modes, and colored logs.                |
 
+## Conventions
+| **Class Type** | **Description**                                        | **Main Responsibility**                                         | **Simplified Descriptor**        |
+|----------------|--------------------------------------------------------|-----------------------------------------------------------------|----------------------------------|
+| **Manager**    | Central interface for module operations.               | Coordinate module operations and interactions.                  | Module Facade                    |
+| **Installer**  | Sets up dependencies and configurations for a module.  | Install and initialize all necessary components of a module.    | Initializes Module Components    |
+| **Config**     | Configures behavior settings for a specific module.    | Define adjustable parameters for module behavior.               | ScriptableObject                 |
+| **Factory**    | Handles creation and initial setup of module components.| Instantiate and configure new component instances with dependencies. | Creates Data Instances          |
+| **Spawner**    | Manages in-scene instantiation of module components.   | Spawn component instances within the game environment.          | Instantiates GameObjects         |
+| **Repository** | Manages a collection of component data objects.        | Manage and maintain a collection of data objects for access and manipulation. | Manages Data Collection         |
+| **Data**       | Stores state and properties of a module component.      | Maintain and serialize state information for components.        | Serializable Class               |
+| **Behaviour**  | Manages the combined behavior and presentation of components. | Integrate and manage component interactions, physics, and visual updates. | Manages Component Behaviour     |
+
 
 ## Roadmap 🚧
 
-My wishlist for Santa Clause:
+Coming soon. Probably. Maybe. Perhaps. Never.
 
 | Feature                   | Description                                                                 |
 |---------------------------|-----------------------------------------------------------------------------|
