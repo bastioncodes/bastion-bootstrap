@@ -17,7 +17,7 @@
         /// <param name="model">The model to add to the repository.</param>
         public int Add(TModel model)
         {
-            var id = IncrementKeyCounter();
+            var id = GetNextKey();
             
             base.Add(id, model);
 
@@ -28,7 +28,7 @@
         /// Increments the key counter and returns the new key.
         /// </summary>
         /// <returns>The next integer key.</returns>
-        private int IncrementKeyCounter()
+        public int GetNextKey()
         {
             KeyCounter++;
             
