@@ -34,5 +34,11 @@
             
             return KeyCounter;
         }
+
+        public override void Clear()
+        {
+            KeyCounter = 0;
+            base.Clear();
+        }
     }
 }
