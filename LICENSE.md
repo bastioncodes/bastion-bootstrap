@@ -1,4 +1,4 @@
-Copyright © 2023 Sebastian Feistl
+Copyright © 2024 Sebastian Feistl
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
