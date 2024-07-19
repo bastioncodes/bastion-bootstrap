@@ -3,24 +3,18 @@ using Bastion.Compliance;
 using Bastion.Core;
 using Bastion.Logging;
 using Bastion.Serialization;
-using Bastion.Serialization.Newtonsoft;
 using Bastion.Storage;
 using UnityEngine;
+using Color = Bastion.Theme.Color;
 
 namespace Bastion.Boot
 {
-    /// <summary>
-    /// Create and bind global dependencies.
-    /// <remarks>
-    /// Singletons are objects with only one of its kind.
-    /// Transients are objects that can have multiple instances. They will need to be created using a <see cref="Factory{TModel}"/> in order to resolve dependencies.
-    /// </remarks>
-    /// </summary>
-    public class AppInstaller : MonoBehaviour, IInstaller
+    [Log(nameof(ProjectInstaller), Color = Color.Blue)]
+    public class ProjectInstaller : MonoBehaviour, IInstaller
     {
         public void InstallBindings(ContainerBuilder builder)
         {
-            BastionLogger.LogInfo("Installing global bindings ...");
+            BastionLogger.LogInfo("Installing project bindings ...");
 
             // Install global bindings
             builder.AddSingleton(typeof(FileManager));

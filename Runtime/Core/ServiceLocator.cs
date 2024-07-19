@@ -1,5 +1,4 @@
 ﻿using System;
-using Bastion.Logging;
 using Reflex.Core;
 
 namespace Bastion.Core
@@ -11,7 +10,7 @@ namespace Bastion.Core
         public static void SetContainer(Container container)
         {
             Container = container;
-            BastionLogger.LogInfo("App container built successfully.");
+            // BastionLogger.LogInfo("App container built successfully.");
         }
 
         public static T Find<T>()

@@ -2,7 +2,8 @@
     "name": "Bastion.Editor",
     "rootNamespace": "",
     "references": [
-        "GUID:3b7073b0ff6a2b24080143a0888beeb2"
+        "GUID:3b7073b0ff6a2b24080143a0888beeb2",
+        "GUID:1530a967b84cfb44dbdd5e8a1989764f"
     ],
     "includePlatforms": [
         "Editor"

@@ -6,7 +6,7 @@ namespace Bastion.Core
 {
     public abstract class Config : ScriptableObject
     {
-        private const string DefaultPath = "Configs/";
+        private const string DefaultPath = "";
         
         protected static T Load<T>(string path = null) where T : Config
         {

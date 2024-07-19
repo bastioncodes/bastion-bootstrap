@@ -1,14 +1,18 @@
+using System;
 using UnityEngine;
 using Reflex.Attributes;
 using Bastion.Compliance;
+using Bastion.Logging;
 using Bastion.Storage;
+using Color = Bastion.Theme.Color;
 
-namespace Bastion.Samples.Entrypoint
+namespace Bastion
 {
     /// <summary>
     /// The entry point of the application.
     /// </summary>
-    public class App : MonoBehaviour
+    [Log(nameof(AppSample), Color = Color.Amber)]
+    public class AppSample : MonoBehaviour
     {
         [Inject] private readonly LegalManager _legalManager;
         [Inject] private readonly FileManager _fileManager;
@@ -17,6 +21,13 @@ namespace Bastion.Samples.Entrypoint
         {
             _fileManager.Initialize();
             _legalManager.Initialize();
+            
+            BastionLogger.LogInfo("Started.");
+        }
+
+        private void OnApplicationQuit()
+        {
+            BastionLogger.LogInfo("Stopped.");
         }
     }
 }

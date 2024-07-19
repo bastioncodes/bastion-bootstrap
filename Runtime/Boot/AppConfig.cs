@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Bastion.Boot
 {
-    [CreateAssetMenu(fileName = nameof(AppConfig), menuName = "Bastion/Configs/App Config")]
+    [CreateAssetMenu(fileName = nameof(AppConfig), menuName = "Bastion/Configs/AppConfig")]
     public class AppConfig : Config
     {
         [Header("Serialization (Optional)")]
