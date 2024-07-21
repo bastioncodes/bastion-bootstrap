@@ -5,7 +5,7 @@ namespace Bastion.Utilities
 {
     public class GitUtils
     {
-        public const string DefaultVersion = "v0.0.0";
+        public const string DefaultVersion = "0.0.0";
         
         public static string GetCurrentTagVersion()
         {
