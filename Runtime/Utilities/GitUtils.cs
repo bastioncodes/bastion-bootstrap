@@ -3,9 +3,9 @@ using System.Diagnostics;
 
 namespace Bastion.Utilities
 {
-    public class GitUtils
+    public static class GitUtils
     {
-        public const string DefaultVersion = "0.0.0";
+        private const string DefaultVersion = "0.0.0";
         
         public static string GetCurrentTagVersion()
         {
