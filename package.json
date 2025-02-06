@@ -1,15 +1,19 @@
 {
-  "name": "codes.bastion",
-  "version": "0.0.1",
-  "displayName": "Bastion",
-  "description": "An experimental Unity bootstrap framework for faster and easier game development.",
+  "name": "com.bastion.codes.bootstrap",
+  "version": "0.1.0",
+  "displayName": "Bastion Bootstrap",
+  "description": "A modular Unity framework for structured game development.",
   "unity": "2022.3",
   "unityRelease": "25f1",
-  "documentationUrl": "https://bastion.codes/docs",
-  "changelogUrl": "https://bastion.codes/changelog",
-  "licensesUrl": "https://bastion.codes/license",
+  "documentationUrl": "https://github.com/bastioncodes/bastion-bootstrap/blob/main/README.md",
+  "licensesUrl": "https://github.com/bastioncodes/bastion-bootstrap/blob/main/LICENSE.md",
+  "changelogUrl": "https://github.com/bastioncodes/bastion-bootstrap/blob/main/CHANGELOG.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bastioncodes/bastion-bootstrap.git"
+  },
   "dependencies": {
-    "com.gustavopsantos.reflex": "8.1.0",
+    "com.gustavopsantos.reflex": "9.0.1",
     "com.unity.nuget.newtonsoft-json": "3.2.1"
   },
   "keywords": [

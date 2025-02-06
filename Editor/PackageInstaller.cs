@@ -37,15 +37,12 @@ namespace Bastion.Editor
             
             AssetDatabase.Refresh();
             
-            // Inject SceneScope game object into current scene
-            CreateSceneScopeIfNeeded();
-            
             CreateAppConfig();
             
             BastionLogger.LogSuccess("Installed Bastion successfully. Create the app in the scene to get started.");
         }
         
-        [MenuItem("GameObject/Bastion/App", false, 0)]
+        [MenuItem("GameObject/Bastion/Install App in Scene", false, 0)]
         public static void CreateApp()
         {
             BastionLogger.LogWarning("Creating app object");
@@ -60,6 +57,10 @@ namespace Bastion.Editor
             
             _app = new GameObject("App");
             AddComponentByTypeName(_app, "Bastion.App");
+
+            // Inject SceneScope game object into current scene
+            var sceneScope = CreateSceneScopeIfNeeded();
+            AddComponentByTypeName(sceneScope, "Bastion.AppInstaller");
         }
 
         private static void CreateDirectoryIfNeeded(string filePath)
@@ -92,20 +93,22 @@ namespace Bastion.Editor
             Debug.Log("Script copied and class name changed.");
         }
 
-        private static void CreateSceneScopeIfNeeded()
+        private static GameObject CreateSceneScopeIfNeeded()
         {
             var go = GameObject.Find(SceneScopeName);
 
             if (go != null)
             {
                 BastionLogger.LogWarning("SceneScope already exists.");
-                return;
+                return go;
             }
 
             go = new GameObject(SceneScopeName);
             go.AddComponent<SceneScope>();
 
             BastionLogger.Log("New SceneScope created.");
+
+            return go;
         }
 
         private static void CreateAppConfig()
