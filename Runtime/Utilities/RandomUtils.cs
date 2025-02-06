@@ -17,6 +17,15 @@ namespace Bastion.Utilities
         }
         
         /// <summary>
+        /// Generates a random boolean value (true or false).
+        /// </summary>
+        /// <returns>Randomly true or false.</returns>
+        public static bool GetRandomBool()
+        {
+            return Random.Range(0, 2) == 1;
+        }
+        
+        /// <summary>
         /// Returns a random point within a circle of a given radius.
         /// </summary>
         /// <param name="radius">Radius of the circle.</param>
