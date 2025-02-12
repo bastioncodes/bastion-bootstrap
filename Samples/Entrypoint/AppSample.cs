@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Reflex.Attributes;
 using Bastion.Logging;
