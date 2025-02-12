@@ -13,10 +13,10 @@ namespace Bastion.Editor
     [Log(nameof(PackageInstaller), Color = Color.Blue)]
     public static class PackageInstaller
     {
-        private const string SourcePath = "Packages/codes.bastion/Samples/Entrypoint/AppSample.cs";
+        private const string SourcePath = "Packages/com.bastion.codes.bootstrap/Samples/Entrypoint/AppSample.cs";
         private const string TargetPath = "Assets/Scripts/App.cs";
         
-        private const string InstallerSourcePath = "Packages/codes.bastion/Samples/Entrypoint/AppInstallerSample.cs";
+        private const string InstallerSourcePath = "Packages/com.bastion.codes.bootstrap/Samples/Entrypoint/AppInstallerSample.cs";
         private const string InstallerTargetPath = "Assets/Scripts/AppInstaller.cs";
         
         private const string AppConfigTargetPath = "Assets/Resources/AppConfig.asset";
@@ -27,6 +27,8 @@ namespace Bastion.Editor
         [MenuItem("Bastion/Install Package")]
         public static async void Install()
         {
+            BastionLogger.LogInfo("Installing Bastion ...");
+            
             CreateDirectoryIfNeeded(TargetPath);
             
             // Create entry point file: App.cs
@@ -45,8 +47,6 @@ namespace Bastion.Editor
         [MenuItem("GameObject/Bastion/Install App in Scene", false, 0)]
         public static void CreateApp()
         {
-            BastionLogger.LogWarning("Creating app object");
-            
             // Create app game object
             _app = GameObject.Find("App");
             if (_app != null)
@@ -57,10 +57,15 @@ namespace Bastion.Editor
             
             _app = new GameObject("App");
             AddComponentByTypeName(_app, "Bastion.App");
+            BastionLogger.Log("New \"App\" created in scene.");
 
             // Inject SceneScope game object into current scene
             var sceneScope = CreateSceneScopeIfNeeded();
             AddComponentByTypeName(sceneScope, "Bastion.AppInstaller");
+            
+            BastionLogger.Log("\"AppInstaller\" has been attached to \"SceneScope\".");
+            BastionLogger.LogSuccess("Setup completed!");
+            BastionLogger.LogInfo("\"App\" is the entry point where all modules are initialized. Install your global dependencies in \"AppInstaller\" to get started. Good luck!");
         }
 
         private static void CreateDirectoryIfNeeded(string filePath)
@@ -79,7 +84,7 @@ namespace Bastion.Editor
         {
             if (!File.Exists(sourcePath))
             {
-                Debug.LogError("Source file does not exist.");
+                BastionLogger.LogError($"Source file does not exist at \"{sourcePath}\" ");
                 return;
             }
             
@@ -90,7 +95,7 @@ namespace Bastion.Editor
             text = text.Replace(sourceClassName, targetClassName);
             await File.WriteAllTextAsync(targetPath, text);
         
-            Debug.Log("Script copied and class name changed.");
+            BastionLogger.Log($"New file created at \"{targetPath}\"");
         }
 
         private static GameObject CreateSceneScopeIfNeeded()
@@ -106,7 +111,7 @@ namespace Bastion.Editor
             go = new GameObject(SceneScopeName);
             go.AddComponent<SceneScope>();
 
-            BastionLogger.Log("New SceneScope created.");
+            BastionLogger.Log("New \"SceneScope\" created in scene.");
 
             return go;
         }
@@ -118,7 +123,7 @@ namespace Bastion.Editor
             AssetDatabase.CreateAsset(appConfig, AppConfigTargetPath);
             AssetDatabase.SaveAssets();
             
-            BastionLogger.Log($"New AppConfig created at \"{AppConfigTargetPath}\"");
+            BastionLogger.Log($"New configuration created at \"{AppConfigTargetPath}\"");
         }
         
         private static void AddComponentByTypeName(GameObject gameObject, string typeName)
