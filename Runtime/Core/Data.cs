@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using Reflex.Attributes;
+﻿using Reflex.Attributes;
 using Bastion.Serialization;
 using Bastion.Storage;
 using Reflex.Injectors;
@@ -14,7 +13,6 @@ namespace Bastion.Core
     /// Essential dependencies, such as <see cref="IJsonConverter"/> and <see cref="FileManager"/>, are injected
     /// and readily available to derived classes, facilitating seamless serialization and file management.
     /// </remarks>
-    [DataContract]
     public abstract class Data
     {
         [Inject] protected IJsonConverter JsonConverter;
