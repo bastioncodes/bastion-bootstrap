@@ -1,4 +1,4 @@
-using UnityEngine;
+using Bastion.Core;
 using Reflex.Attributes;
 using Bastion.Logging;
 using Bastion.Storage;
@@ -10,20 +10,17 @@ namespace Bastion
     /// The entry point of the application.
     /// </summary>
     [Log(nameof(AppSample), Color = Color.Sky)]
-    public class AppSample : MonoBehaviour
+    public class AppSample : AppBootstrap
     {
         [Inject] private readonly FileManager _fileManager;
 
-        private void Start()
+        private async void Start()
         {
-            _fileManager.Initialize();
-            
-            BastionLogger.LogInfo("Started.");
-        }
-
-        private void OnApplicationQuit()
-        {
-            BastionLogger.LogInfo("Stopped.");
+            await InitManagersAsync(new Manager[]
+            {
+                _fileManager,
+                // Add managers here ...
+            });
         }
     }
 }
