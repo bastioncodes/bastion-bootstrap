@@ -15,13 +15,13 @@ namespace Bastion.Core
         /// </summary>
         /// <param name="onComplete">Callback invoked when initialization is successfully completed.</param>
         /// <param name="onError">Callback invoked if an initialization error occurs.</param>
-        public abstract void Initialize(Action onComplete = null, Action<Exception> onError = null);
+        public abstract void Init(Action onComplete = null, Action<Exception> onError = null);
         
         /// <summary>
         /// Notifies subscribers about the completion of the manager's initialization.
         /// This method should be called during the initialization to trigger global notifications.
         /// </summary>
-        /// <param name="onComplete">The appropriate Action of the <see cref="Initialize"/> method.</param>
+        /// <param name="onComplete">The appropriate Action of the <see cref="Init"/> method.</param>
         protected void NotifyCompleted(Action onComplete)
         {
             ManagerInitialized?.Invoke(GetType());

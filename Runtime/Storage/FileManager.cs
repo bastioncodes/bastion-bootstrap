@@ -18,7 +18,7 @@ namespace Bastion.Storage
         /// </summary>
         public string RootPath => _rootPath ??= Application.persistentDataPath + Path.DirectorySeparatorChar;
 
-        public override void Initialize(Action onComplete = null, Action<Exception> onError = null)
+        public override void Init(Action onComplete = null, Action<Exception> onError = null)
         {
             onComplete?.Invoke();
         }
