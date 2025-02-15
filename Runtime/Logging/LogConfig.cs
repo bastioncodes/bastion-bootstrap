@@ -39,13 +39,11 @@ namespace Bastion.Logging
                     
                     var id = loggableAttribute.Id;
                     
+                    // Skip because it's already cached
                     if (LogConfigs.ContainsKey(id))
-                    {
-                        BastionLogger.LogWarning($"Cannot cache log configuration because key \"{id}\" already exists.");
                         continue;
-                    }
                     
-                    // Cache their log configuration
+                    // Cache the log configuration
                     LogConfigs[id] = new LogAttributeConfig
                     {
                         Name = loggableAttribute.Name,

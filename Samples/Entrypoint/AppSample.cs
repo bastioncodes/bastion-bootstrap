@@ -9,7 +9,7 @@ namespace Bastion
     /// <summary>
     /// The entry point of the application.
     /// </summary>
-    [Log(nameof(AppSample), Color = Color.Amber)]
+    [Log(nameof(AppSample), Color = Color.Sky)]
     public class AppSample : MonoBehaviour
     {
         [Inject] private readonly FileManager _fileManager;

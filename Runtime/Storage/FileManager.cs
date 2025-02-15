@@ -20,7 +20,7 @@ namespace Bastion.Storage
 
         public override void Initialize(Action onComplete = null, Action<Exception> onError = null)
         {
-            //
+            onComplete?.Invoke();
         }
 
         /// <summary>
