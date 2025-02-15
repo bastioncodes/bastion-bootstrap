@@ -34,9 +34,8 @@ namespace Bastion.Core
                 manager.Init(() =>
                 {
                     stopwatch.Stop();
-                    string startupTime = stopwatch.ElapsedMilliseconds + " ms";
-                    if (stopwatch.ElapsedMilliseconds == 0) startupTime = "less than 1 ms";
-                    
+                    long elapsedTime = stopwatch.ElapsedMilliseconds;
+                    string startupTime = elapsedTime == 0 ? "< 1 ms" : $"{elapsedTime} ms";
                     string managerName = LogUtility.Colorize(manager.GetType().Name, Color.Blue);
                     BastionLogger.Log($"{managerName} initialized in ({startupTime}).");
                     tcs.SetResult(true);
