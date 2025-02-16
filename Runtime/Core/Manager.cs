@@ -9,24 +9,28 @@ namespace Bastion.Core
     public abstract class Manager : IDisposable
     {
         public static event Action<Type> ManagerInitialized;
+
+        /// <summary>
+        /// Starts and initializes the manager.
+        /// Do not override this method. Instead, override <see cref="Start"/>.
+        /// </summary>
+        /// <param name="onComplete">Callback invoked when initialization is successfully completed.</param>
+        /// <param name="onError">Callback invoked if an initialization error occurs.</param>
+        public virtual void Awake(Action onComplete = null, Action<Exception> onError = null)
+        {
+            Start(() =>
+            {
+                ManagerInitialized?.Invoke(GetType());
+                onComplete?.Invoke();
+            }, onError);
+        }
         
         /// <summary>
         /// Initializes the manager, with optional completion and error handling callbacks.
         /// </summary>
         /// <param name="onComplete">Callback invoked when initialization is successfully completed.</param>
         /// <param name="onError">Callback invoked if an initialization error occurs.</param>
-        public abstract void Init(Action onComplete = null, Action<Exception> onError = null);
-        
-        /// <summary>
-        /// Notifies subscribers about the completion of the manager's initialization.
-        /// This method should be called during the initialization to trigger global notifications.
-        /// </summary>
-        /// <param name="onComplete">The appropriate Action of the <see cref="Init"/> method.</param>
-        protected void NotifyCompleted(Action onComplete)
-        {
-            ManagerInitialized?.Invoke(GetType());
-            onComplete?.Invoke();
-        }
+        protected abstract void Start(Action onComplete = null, Action<Exception> onError = null);
         
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.

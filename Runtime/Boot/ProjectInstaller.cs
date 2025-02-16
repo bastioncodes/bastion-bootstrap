@@ -12,7 +12,7 @@ namespace Bastion.Boot
     {
         public void InstallBindings(ContainerBuilder builder)
         {
-            BastionLogger.LogInfo("Installing project bindings ...");
+            BastionLogger.Log("Installing project bindings ...");
 
             // Install global bindings
             new JsonInstaller().InstallBindings(builder);

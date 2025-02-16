@@ -14,7 +14,7 @@ namespace Bastion.Compliance
             _controller = controller;
         }
 
-        public override void Init(Action onComplete = null, Action<Exception> onError = null)
+        protected override void Start(Action onComplete = null, Action<Exception> onError = null)
         {
             _controller.TermsAndConditionsAccepted += () => { TermsAndConditionsAccepted(); };
             onComplete?.Invoke();

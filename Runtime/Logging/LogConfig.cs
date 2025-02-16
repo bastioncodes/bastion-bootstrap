@@ -65,7 +65,7 @@ namespace Bastion.Logging
                 sb.AppendLine(kvp.Key);
             }
 
-            BastionLogger.LogInfo(sb.ToString());
+            BastionLogger.Log(sb.ToString());
         }
         
         public static LogAttributeConfig GetLogAttributeConfig(string key)

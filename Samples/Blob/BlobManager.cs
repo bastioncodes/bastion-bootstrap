@@ -12,7 +12,7 @@ namespace Bastion.Samples.Blob
         [Inject] private readonly BlobRepository _blobs;
         [Inject] private readonly BlobFactory _factory;
         
-        public override void Init(Action onComplete = null, Action<Exception> onError = null)
+        protected override void Start(Action onComplete = null, Action<Exception> onError = null)
         {
             for (int i = 0; i < 10; i++)
             {

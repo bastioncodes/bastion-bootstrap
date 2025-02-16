@@ -31,7 +31,7 @@ namespace Bastion.Core
             {
                 var stopwatch = Stopwatch.StartNew();
                 var tcs = new TaskCompletionSource<bool>();
-                manager.Init(() =>
+                manager.Awake(() =>
                 {
                     stopwatch.Stop();
                     long elapsedTime = stopwatch.ElapsedMilliseconds;
